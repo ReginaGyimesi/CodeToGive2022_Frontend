@@ -2,7 +2,7 @@
 const ROUTES = {
   home: "/",
   test: "/test",
-  assessments: "/assessments",
+  assessments: "/",
   assessments_admin: "/admin/assessments",
   admin: "/admin",
   login: "/login",

@@ -2,14 +2,14 @@ import * as React from "react"
 import { FormControl, InputLabel, MenuItem } from "@mui/material"
 import Select from "@mui/material/Select"
 import styled from "@emotion/styled"
-import CustomTextField from "../../../CustomTextField/CustomTextField"
 import { useForm } from "react-hook-form"
+import CustomTextField from "../../../CustomTextField/CustomTextField"
 
 export const MultipleChoice = ({ tags }: any) => {
   const { control, handleSubmit } = useForm()
-  const [tag, setTag] = React.useState(null)
+  const [tag, setTag] = React.useState<any>(null)
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: any) => {
     setTag(event.target.value as string)
   }
   return (

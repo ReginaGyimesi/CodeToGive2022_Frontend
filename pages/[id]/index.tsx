@@ -1,3 +1,5 @@
+import { useRouter } from "next/router"
+import { CircularProgress } from "@mui/material"
 import { useEffect, useState } from "react"
 import { AssessmentCard } from "../../components/Assessments/AssessmentCard/AssessmentCard"
 import { AssessmentResultCard } from "../../components/Assessments/AssessmentResultCard/AssessmentResultCard"
@@ -5,6 +7,7 @@ import PageTitle from "../../components/common/PageTitle"
 import Layout from "../../components/Layout"
 import { useUUIDContext } from "../../context/UUIDContext"
 import { assessments as mock_assessments_display } from "../../data/assessment_display"
+import { useLocalStorage } from "../../hooks/useLocalStorage"
 import { ITestDisplay } from "../../types/assessment"
 
 function rearrangedArray(from: number, to: number, arr: any) {
@@ -16,9 +19,20 @@ function rearrangedArray(from: number, to: number, arr: any) {
   return newArr
 }
 
+const NAME = "uuid-store"
+
 const AssessmentsPage = () => {
-  const { uuid } = useUUIDContext()
+  const router = useRouter()
+  const id = router.query.id
+  const { UUID, setUUID } = useUUIDContext()
   const [assessments, setAssessments] = useState<ITestDisplay[]>([])
+
+  useEffect(() => {
+    if (!UUID && typeof id === "string") {
+      setUUID(id)
+      localStorage.setItem(NAME, id)
+    }
+  }, [UUID, id, setUUID])
 
   const incomplete = assessments?.filter(
     (assessment) => assessment.progress < 100
@@ -27,7 +41,7 @@ const AssessmentsPage = () => {
     const fetchAssessmentData = async () => {
       try {
         const req = await fetch(
-          `${process.env.HOST}/api/v1/assessments/${uuid}`
+          `${process.env.HOST}/api/v1/assessments/${UUID}`
         )
         const res = await req.json()
 
@@ -38,10 +52,24 @@ const AssessmentsPage = () => {
         setAssessments(mock_assessments_display)
       }
     }
-    if (uuid) {
+    if (UUID) {
       fetchAssessmentData()
     }
-  }, [uuid])
+  }, [UUID])
+
+  if (!id || !UUID)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    )
 
   return (
     <Layout>

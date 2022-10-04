@@ -9,15 +9,15 @@ export default function useUUID() {
     if (!UUID) {
       const fetchAssessmentData = async () => {
         try {
-          const req = await fetch(
-            `${process.env.HOST}/api/v1/assessments/generate`,
-            {
-              method: "POST",
-            }
-          )
-          const res = await req.json()
-          setUUID(res?.uuid)
-          localStorage.setItem(NAME, res?.uuid)
+          // const req = await fetch(
+          //   `${process.env.HOST}/api/v1/assessments/generate`,
+          //   {
+          //     method: "POST",
+          //   }
+          // )
+          // const res = await req.json()
+          // setUUID(res?.uuid)
+          // localStorage.setItem(NAME, res?.uuid)
         } catch {
           console.log("ERRORS: FETCH UUID")
           setUUID("1234")

@@ -3,7 +3,7 @@ import { Button, LinearProgress } from "@mui/material"
 import DoneIcon from "@mui/icons-material/Done"
 import { useRouter } from "next/router"
 import { assessments } from "../../../data/assessment_display"
-
+import NextLink from "next/link"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import TranslateIcon from "@mui/icons-material/Translate"
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
@@ -11,6 +11,7 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined"
 import CustomButton from "../../common/CustomButton/CustomButton"
 import { ITestDisplay } from "../../../types/assessment"
 import { HashedMapIcon } from "../Assessment.const"
+import { useUUIDContext } from "../../../context/UUIDContext"
 
 type Props = {
   assessment: ITestDisplay
@@ -32,6 +33,7 @@ const handleIcon = (name: string) => {
 
 export const AssessmentCard = ({ assessment }: Props) => {
   const router = useRouter()
+  const { UUID } = useUUIDContext()
 
   return (
     <Container>
@@ -94,25 +96,24 @@ export const AssessmentCard = ({ assessment }: Props) => {
 
             <Text>{assessment.progress}% ready</Text>
           </Flex>
-          <CustomButton
-            style={{
-              marginTop: "40px",
-              boxShadow: "none",
-              padding: "8px 22px",
-              borderRadius: "8px",
-            }}
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              router.push(
-                HashedMapIcon[assessment.type].url + "/" + assessment.test_id
-              )
-            }}
-          >
-            {assessment.progress > 0
-              ? "Continue answering"
-              : "Fill the questionnaire"}
-          </CustomButton>
+          <NextLink href={`/${UUID}${HashedMapIcon[assessment.type].url}`}>
+            <div>
+              <CustomButton
+                style={{
+                  marginTop: "40px",
+                  boxShadow: "none",
+                  padding: "8px 22px",
+                  borderRadius: "8px",
+                }}
+                variant="contained"
+                color="primary"
+              >
+                {assessment.progress > 0
+                  ? "Continue answering"
+                  : "Fill the questionnaire"}
+              </CustomButton>
+            </div>
+          </NextLink>
         </>
       )}
     </Container>

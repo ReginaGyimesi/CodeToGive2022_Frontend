@@ -19,7 +19,7 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
       jsonValue = null
     }
 
-    if (jsonValue != null) return JSON.parse(jsonValue)
+    if (jsonValue != null && !jsonValue) return JSON.parse(jsonValue)
 
     if (typeof initialValue === "function") {
       return (initialValue as () => T)()

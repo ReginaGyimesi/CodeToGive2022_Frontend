@@ -5,6 +5,7 @@ type CustomIconButtonProps = {
   _onClick?: any
   icon: any
   align?: string
+  [x: string]: any
 }
 
 export const CustomIconButton = ({
