@@ -102,6 +102,7 @@ const AssessmentTypeEdit = () => {
       <form onSubmit={handleSubmit(submitData)}>
         <Flex>
           <PageTitle
+            backURL="/admin/assessments"
             title={"Edit Test #" + routerQuery}
             description="Edit Test and modify Questions data"
           />

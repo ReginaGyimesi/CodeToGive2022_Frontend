@@ -1,14 +1,22 @@
 import styled from "@emotion/styled"
+import Link from "next/link"
 import { ReactElement } from "react"
 
 type Props = {
   title: string
   description?: string | ReactElement
+  backURL?: string
 }
 
-const PageTitle = ({ title, description }: Props) => {
+const PageTitle = ({ title, description, backURL }: Props) => {
+  console.log("backURL", backURL)
   return (
     <Container>
+      {backURL ? (
+        <Link href={backURL}>
+          <Anchor>Back to Assessment</Anchor>
+        </Link>
+      ) : null}
       <Title>{title}</Title>
       <Description>{description ? description : ""}</Description>
     </Container>
@@ -33,4 +41,11 @@ const Title = styled.h2`
 const Description = styled.p`
   font-size: 24px;
   color: #6a6e77;
+`
+
+const Anchor = styled.a`
+  color: #0068ff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
 `
