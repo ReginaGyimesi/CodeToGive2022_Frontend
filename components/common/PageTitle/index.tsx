@@ -9,7 +9,6 @@ type Props = {
 }
 
 const PageTitle = ({ title, description, backURL }: Props) => {
-  console.log("backURL", backURL)
   return (
     <Container>
       {backURL ? (
