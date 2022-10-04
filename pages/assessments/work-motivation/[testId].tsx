@@ -9,7 +9,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline"
 import { AnimatePresence, motion } from "framer-motion"
-import { speak } from "../../../components/common/VoiceAssisstant/VoiceAssisstant"
+import { speak } from "../../../components/Common/VoiceAssisstant/VoiceAssisstant"
 import { useForm } from "react-hook-form"
 import IJob from "../../../types/job"
 import { suggestedJobs as mock_suggestedJobs } from "../../../data/suggested_job"
@@ -22,13 +22,9 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 
 const WorkMotivation = () => {
-<<<<<<<< HEAD:pages/[id]/work-motivation/[testId].tsx
   const { uuid } = useUUIDContext()
   const router = useRouter()
   const testId = router.query.testId
-========
-  const { UUID } = useUUIDContext()
->>>>>>>> main:pages/[id]/work-motivation/index.tsx
   const [isOpenRecommended, setIsOpenRecommended] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [message, setMessage] = useState("")
@@ -40,7 +36,6 @@ const WorkMotivation = () => {
 
   useEffect(() => {
     const fetchTestData = async () => {
-<<<<<<<< HEAD:pages/[id]/work-motivation/[testId].tsx
       if (typeof testId === "string") {
         try {
           const req = await fetch(
@@ -52,21 +47,11 @@ const WorkMotivation = () => {
         } catch {
           setTestData({} as ITest)
         }
-========
-      try {
-        const req = await fetch(
-          `${process.env.HOST}/api/v1/assessments/${UUID}/tests?test_type=MOTIVATION_TEST`
-        )
-        const res = await req.json()
-        setTestData(res)
-      } catch {
-        setTestData({} as ITest)
->>>>>>>> main:pages/[id]/work-motivation/index.tsx
       }
     }
 
     fetchTestData()
-  }, [UUID, currentQuestionIndex])
+  }, [uuid, currentQuestionIndex])
 
   const questions = testData.questions || mock_test.questions
 
@@ -122,7 +107,7 @@ const WorkMotivation = () => {
   }
 
   const fetchRecommendedJobsData = async () => {
-    const req = await fetch(`${process.env.HOST}/api/v1/${UUID}/suggested-jobs`)
+    const req = await fetch(`${process.env.HOST}/api/v1/${uuid}/suggested-jobs`)
     const res = await req.json()
     setData(res)
   }
@@ -167,7 +152,7 @@ const WorkMotivation = () => {
   }, [])
   useEffect(() => {
     fetchRecommendedJobsData()
-  }, [UUID])
+  }, [uuid])
 
   return (
     <Layout commands={commands} message={message}>

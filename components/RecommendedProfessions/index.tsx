@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { useBookmarkContext } from "../../context/BookmarkContext"
 import IJob from "../../types/job"
+import { useUUIDContext } from "../../context/UUIDContext"
 
 type Props = {
   onClickCallBack: any

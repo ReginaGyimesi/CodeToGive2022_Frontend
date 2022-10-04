@@ -4,9 +4,9 @@ import Select from "@mui/material/Select"
 import styled from "@emotion/styled"
 
 export const Slider = ({ tags }: any) => {
-  const [tag, setTag] = React.useState<any>(null)
+  const [tag, setTag] = React.useState(null)
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: SelectChangeEvent) => {
     setTag(event.target.value as string)
   }
   return (

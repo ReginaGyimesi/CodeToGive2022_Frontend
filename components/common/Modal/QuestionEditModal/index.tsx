@@ -2,13 +2,12 @@ import * as React from "react"
 import CloseIcon from "@mui/icons-material/Close"
 import styled from "@emotion/styled"
 import { Dialog, FormControl, Input, InputLabel, MenuItem } from "@mui/material"
+import CustomButton from "../../CustomButton/CustomButton"
 import AddIcon from "@mui/icons-material/Add"
-
+import CustomTextField from "../../CustomTextField/CustomTextField"
 import { useForm } from "react-hook-form"
 import Select, { SelectChangeEvent } from "@mui/material/Select"
 import AttachFileIcon from "@mui/icons-material/AttachFile"
-import CustomButton from "../../CustomButton/CustomButton"
-import CustomTextField from "../../CustomTextField/CustomTextField"
 import { Slider } from "./QuestionType/Slider"
 import { MultipleChoice } from "./QuestionType/MultipleChoise"
 
@@ -21,8 +20,8 @@ const QuestionEditModal = ({ onClick }: ModalProps) => {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const { control, handleSubmit } = useForm()
-  const [type, setType] = React.useState<any>("slider")
-  const [file, setFile] = React.useState<any>(null)
+  const [type, setType] = React.useState("slider")
+  const [file, setFile] = React.useState(null)
 
   const handleChange = (event: SelectChangeEvent) => {
     setType(event.target.value as string)
@@ -30,11 +29,11 @@ const QuestionEditModal = ({ onClick }: ModalProps) => {
 
   const hiddenFileInput = React.useRef<any>(null)
 
-  const handleClick = (e: any) => {
+  const handleClick = (e) => {
     hiddenFileInput.current?.click()
   }
 
-  const handleFileChange = (e: any) => {
+  const handleFileChange = (e) => {
     const fileUploaded = e.target.files[0]
     setFile(fileUploaded)
   }

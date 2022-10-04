@@ -5,7 +5,7 @@ import Main from "./Main/Main"
 
 import dynamic from "next/dynamic"
 import { CircularProgress } from "@mui/material"
-import { AccessibilityPanel } from "../common/AccessibilityPanel"
+import { AccessibilityPanel } from "../Common/AccessibilityPanel"
 
 type Props = {
   children: ReactNode
@@ -26,7 +26,7 @@ type Props = {
 const Layout = ({ commands, message, children }: Props) => {
   const [assisstant, setAssisstant] = useState(false)
   const VoiceAssisstant = dynamic(
-    () => import("../common/VoiceAssisstant/VoiceAssisstant"),
+    () => import("../../components/Common/VoiceAssisstant/VoiceAssisstant"),
     {
       loading: () => (
         <IconWrapper>
